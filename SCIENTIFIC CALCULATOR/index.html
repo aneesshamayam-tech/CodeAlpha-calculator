@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Calculator</title>
+
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #0f172a;
+    font-family: Arial;
+}
+
+.calculator {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    width: 300px;
+}
+
+#display {
+    width: 93%;
+    height: 55px;
+    font-size: 22px;
+    margin-bottom: 15px;
+    padding: 10px;
+    text-align: right;
+    border: none;
+    border-radius: 8px;
+    background: #0f172a;
+    color: white;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+button {
+    height: 55px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    background: #334155;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #3b334d;
+}
+
+.equal {
+    background: #f97316;
+}
+
+.equal:hover {
+    background: #ea580c;
+}
+
+.special {
+    background: #2563eb;
+}
+
+.special:hover {
+    background: #1d4ed8;
+}
+
+.zero {
+    grid-column: span 1;
+}
+</style>
+
+</head>
+<body>
+
+<div class="calculator">
+
+    <input type="text" id="display" disabled>
+
+    <div class="buttons">
+
+        <button onclick="clearAll()">AC</button>
+        <button onclick="deleteOne()">DEL</button>
+        <button onclick="append('%')">%</button>
+        <button onclick="append('/')">/</button>
+
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button onclick="append('*')">*</button>
+
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button onclick="append('-')">-</button>
+
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button onclick="append('+')">+</button>
+
+        <button onclick="square()" class="special">x²</button>
+        <button onclick="sqrt()" class="special">√</button>
+        <button onclick="append('0')" class="zero">0</button>
+        <button class="equal" onclick="calculate()">=</button>
+
+    </div>
+
+</div>
+
+<script>
+let display = document.getElementById("display");
+
+// show input
+function append(value) {
+    display.value += value;
+}
+
+// clear all
+function clearAll() {
+    display.value = "";
+}
+
+// delete one digit
+function deleteOne() {
+    display.value = display.value.slice(0, -1);
+}
+
+// calculate result
+function calculate() {
+    try {
+        display.value = eval(display.value);
+    } catch {
+        display.value = "Error";
+    }
+}
+
+// square function
+function square() {
+    if (display.value !== "") {
+        display.value = Math.pow(eval(display.value), 2);
+    }
+}
+
+// square root function
+function sqrt() {
+    if (display.value !== "") {
+        display.value = Math.sqrt(eval(display.value));
+    }
+}
+
+/* ⌨️ Keyboard Support */
+document.addEventListener("keydown", function(event) {
+    const key = event.key;
+
+    if (!isNaN(key) || "+-*/.%".includes(key)) {
+        append(key);
+    } 
+    else if (key === "Enter") {
+        calculate();
+    } 
+    else if (key === "Backspace") {
+        deleteOne();
+    } 
+    else if (key === "Escape") {
+        clearAll();
+    }
+});
+</script>
+
+</body>
