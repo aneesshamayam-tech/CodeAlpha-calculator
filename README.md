@@ -1,2 +1,2 @@
 # CodeAlpha-intern task
-A feature-rich Scientific Calculator built with HTML, CSS, and JavaScript that supports basic arithmetic, exponential, and other advanced mathematical functions with a clean and responsive user interface.
+A responsive Scientific Calculator and Personal Portfolio Website built using HTML, CSS, and JavaScript, featuring advanced mathematical functions, modern UI design, project showcases, and professional portfolio sections.
