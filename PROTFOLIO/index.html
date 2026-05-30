@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Portfolio</title>
+
+<style>
+:root {
+    --bg: #0f172a;
+    --text: white;
+    --card: #1e293b;
+    --accent: #38bdf8;
+}
+
+.light {
+    --bg: #f1f5f9;
+    --text: #0f172a;
+    --card: white;
+    --accent: #2563eb;
+}
+
+body {
+    margin: 0;
+    font-family: Arial;
+    background: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background: var(--card);
+    position: fixed;
+    width: 98%;
+    top: 0;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: var(--text);
+}
+
+/* HERO */
+.hero {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.hero h1 {
+    font-size: 40px;
+}
+
+.typing {
+    color: var(--accent);
+    font-size: 22px;
+    height: 30px;
+}
+
+/* PROFILE */
+.profile {
+    margin-top: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: gray;
+}
+
+/* SECTIONS */
+section {
+    padding: 80px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.card {
+    background: var(--card);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+/* BUTTONS */
+button {
+    padding: 10px 15px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* FLOAT BUTTON */
+.toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div><b>MyPortfolio</b></div>
+    <div>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="profile"></div>
+
+    <h1>Hi, I'm Shamayam</h1>
+
+    <div class="typing" id="typing"></div>
+
+    <button onclick="downloadCV()">Download CV</button>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <h2>About Me</h2>
+    <div class="card">
+        I am a passionate web developer learning modern technologies and building real-world projects
+        according to requirements.
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <h2>Projects</h2>
+
+    <div class="card">
+        <h3>Calculator App</h3>
+        <p>HTML, CSS, JS advanced calculator with full features.</p>
+    </div>
+
+    <div class="card">
+        <h3>Portfolio Website</h3>
+        <p>Modern responsive portfolio with animations and dark mode.</p>
+    </div>
+</section>
+
+<!-- DARK MODE BUTTON -->
+<button class="toggle" onclick="toggleMode()">🌙 Mode</button>
+
+<script>
+/* 🌙 DARK MODE */
+function toggleMode() {
+    document.body.classList.toggle("light");
+}
+
+/* ⌨️ TYPING EFFECT */
+const text = ["Web Developer", "Frontend Learner", "Internship Student"];
+let i = 0, j = 0;
+
+function type() {
+    let typing = document.getElementById("typing");
+
+    if (j < text[i].length) {
+        typing.innerHTML += text[i][j];
+        j++;
+        setTimeout(type, 100);
+    } else {
+        setTimeout(erase, 1000);
+    }
+}
+
+function erase() {
+    let typing = document.getElementById("typing");
+
+    if (j > 0) {
+        typing.innerHTML = text[i].substring(0, j-1);
+        j--;
+        setTimeout(erase, 50);
+    } else {
+        i = (i + 1) % text.length;
+        setTimeout(type, 200);
+    }
+}
+/* CV DOWNLOAD */
+function downloadCV() {
+    alert("Add your CV file later (PDF download feature)");
+}
+
+/* start typing */
+type();
+</script>
+
+</body>
+</html>
